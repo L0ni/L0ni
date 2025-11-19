@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>МИДИС | Музей моды XX века</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #1a1a1a;
+      --secondary: #2d2d2d;
+      --accent: #ff3366;
+      --accent-light: #ff6699;
+      --text: #e0e0e0;
+      --text-dark: #333333;
+      --gradient: linear-gradient(135deg, #ff3366, #6633ff);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--primary);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      padding: 15px 0;
+      background: rgba(26, 26, 26, 0.98);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      font-size: 28px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logo-subtext {
+      font-size: 12px;
+      color: var(--accent-light);
+      margin-top: -2px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 16px;
+      position: relative;
+      padding: 5px 0;
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: var(--transition);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a.active {
+      color: var(--accent);
+    }
+
+    nav a.active::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Main Content */
+    main {
+      margin-top: 100px;
+      min-height: calc(100vh - 200px);
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Home Page */
+    .hero {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 100px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+      opacity: 0.15;
+      filter: blur(5px);
+    }
+
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: var(--text);
+      opacity: 0.9;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: var(--gradient);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 51, 102, 0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      margin-left: 15px;
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin: 80px 0;
+    }
+
+    .feature-card {
+      background: var(--secondary);
+      border-radius: var(--border-radius);
+      padding: 40px 30px;
+      text-align: center;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      background: rgba(45, 45, 45, 0.9);
+      border-color: var(--accent);
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .feature-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Exhibits Page */
+    .exhibits-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .exhibits-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .exhibits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .exhibit-card {
+      background: var(--secondary);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .exhibit-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      border-color: var(--accent);
+    }
+
+    .exhibit-image {
+      height: 250px;
+      background: linear-gradient(45deg, #6633ff, #ff3366);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .exhibit-image i {
+      font-size: 60px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .exhibit-content {
+      padding: 25px;
+    }
+
+    .exhibit-period {
+      display: inline-block;
+      padding: 5px 15px;
+      background: rgba(255, 51, 102, 0.2);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .exhibit-content h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .exhibit-content p {
+      color: rgba(224, 224, 224, 0.8);
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    .exhibit-designer {
+      color: var(--accent-light);
+      font-weight: 500;
+    }
+
+    /* News Page */
+    .news-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .news-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .news-card {
+      background: var(--secondary);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .news-image {
+      height: 200px;
+      background: linear-gradient(45deg, #3333ff, #ff33cc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .news-image i {
+      font-size: 50px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .news-content {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-date {
+      display: inline-block;
+      padding: 5px 15px;
+      background: rgba(102, 51, 255, 0.2);
+      color: #6633ff;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .news-content h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+      transition: var(--transition);
+    }
+
+    .news-card:hover .news-content h3 {
+      color: var(--accent);
+    }
+
+    .news-content p {
+      color: rgba(224, 224, 224, 0.8);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .news-author {
+      color: var(--accent-light);
+      font-weight: 500;
+    }
+
+    .news-read-more {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .news-read-more:hover {
+      color: white;
+    }
+
+    /* About Page */
+    .about-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .about-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .about-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+      font-size: 17px;
+      line-height: 1.8;
+      color: rgba(224, 224, 224, 0.9);
+    }
+
+    .about-image {
+      height: 500px;
+      background: linear-gradient(45deg, #ff6633, #ff33cc);
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1514432322255-3e40cc3a3a16?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+      opacity: 0.85;
+    }
+
+    .about-image i {
+      font-size: 80px;
+      color: rgba(255, 255, 255, 0.9);
+      position: relative;
+      z-index: 2;
+    }
+
+    .mission-values {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .mission-card {
+      background: var(--secondary);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mission-card:hover {
+      transform: translateX(10px);
+      border-color: var(--accent);
+    }
+
+    .mission-card i {
+      font-size: 36px;
+      margin-bottom: 20px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .mission-card h4 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .mission-card p {
+      color: rgba(224, 224, 224, 0.8);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(15, 15, 15, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 60px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-section h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 25px;
+      color: white;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--gradient);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: rgba(224, 224, 224, 0.8);
+      text-decoration: none;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 51, 102, 0.2);
+      border-radius: 50%;
+      color: var(--accent);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .contact-info {
+      margin-top: 20px;
+    }
+
+    .contact-info p {
+      margin-bottom: 10px;
+      color: rgba(224, 224, 224, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 40px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(224, 224, 224, 0.6);
+      font-size: 15px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .about-image {
+        height: 400px;
+      }
+
+      .mission-values {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 90%;
+        max-width: 300px;
+        background: var(--primary);
+        height: calc(100vh - 80px);
+        flex-direction: column;
+        padding: 30px;
+        gap: 20px;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+        z-index: 999;
+      }
+
+      nav ul.active {
+        left: 0;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .news-grid,
+      .exhibits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .btn-outline {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .about-header h2,
+      .news-header h2,
+      .exhibits-header h2 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Header -->
+
+  <header id="header">
+
+    <div class="container header-container">
+
+      <a href="#" class="logo" onclick="showPage('home')">
+
+        <i class="fas fa-crown logo-icon"></i>
+
+        <div>
+
+          <div class="logo-text">МИДИС</div>
+
+          <div class="logo-subtext">Музей моды XX века</div>
+
+        </div>
+
+      </a>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+
+        <i class="fas fa-bars"></i>
+
+      </button>
+
+      <nav>
+
+        <ul id="navMenu">
+
+          <li><a href="#" onclick="showPage('home')" class="active">Главная</a></li>
+
+          <li><a href="#" onclick="showPage('exhibits')">Экспонаты</a></li>
+
+          <li><a href="#" onclick="showPage('news')">Новости</a></li>
+
+          <li><a href="#" onclick="showPage('about')">О музее</a></li>
+
+        </ul>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+  <!-- Main Content -->
+
+  <main class="container">
+
+    <!-- Home Page -->
+
+    <section id="home" class="page active">
+
+      <div class="hero">
+
+        <div class="hero-content">
+
+          <h1>Мода XX века: История стиля</h1>
+
+          <p>Погрузитесь в мир моды прошлого века — от элегантных платьев 1920-х до смелых экспериментов 1990-х. Откройте для себя шедевры дизайна, которые изменили мир.</p>
+
+          <div>
+
+            <a href="#" class="btn" onclick="showPage('exhibits')">Посмотреть экспонаты</a>
+
+            <a href="#" class="btn btn-outline" onclick="showPage('about')">О музее</a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="features">
+
+        <div class="feature-card">
+
+          <i class="fas fa-palette feature-icon"></i>
+
+          <h3>Уникальная коллекция</h3>
+
+          <p>Более 5000 экспонатов от ведущих дизайнеров XX века, включая Chanel, Dior, YSL и многих других.</p>
+
+        </div>
+
+        <div class="feature-card">
+
+          <i class="fas fa-magic feature-icon"></i>
+
+          <h3>Интерактивные выставки</h3>
+
+          <p>Современные технологии позволяют взаимодействовать с экспонатами и погружаться в эпохи моды.</p>
+
+        </div>
+
+        <div class="feature-card">
+
+          <i class="fas fa-users feature-icon"></i>
+
+          <h3>Образовательные программы</h3>
+
+          <p>Лекции, мастер-классы и экскурсии для всех возрастов, посвященные истории моды и дизайна.</p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Exhibits Page -->
+
+    <section id="exhibits" class="page">
+
+      <div class="exhibits-header">
+
+        <h2>Экспонаты</h2>
+
+        <p>Исследуйте нашу коллекцию исторических нарядов и аксессуаров</p>
+
+      </div>
+
+      <div class="exhibits-grid">
+
+        <div class="exhibit-card">
+
+          <div class="exhibit-image">
+
+            <i class="fas fa-female"></i>
+
+          </div>
+
+          <div class="exhibit-content">
+
+            <span class="exhibit-period">1920-е</span>
+
+            <h3>Платье Флаппер</h3>
+
+            <p>Иконичное платье эпохи джаза с бахромой и блестками, символизирующее свободу и эмансипацию женщин.</p>
+
+            <div class="exhibit-designer">Дизайнер: Coco Chanel</div>
+
+          </div>
+
+        </div>
+
+        <div class="exhibit-card">
+
+          <div class="exhibit-image">
+
+            <i class="fas fa-male"></i>
+
+          </div>
+
+          <div class="exhibit-content">
+
+            <span class="exhibit-period">1950-е</span>
+
+            <h3>Платье-Новое Посмотрение</h3>
+
+            <p>Революционное платье от Christian Dior, определившее силуэт женской моды послевоенного времени.</p>
+
+            <div class="exhibit-designer">Дизайнер: Christian Dior</div>
+
+          </div>
+
+        </div>
+
+        <div class="exhibit-card">
+
+          <div class="exhibit-image">
+
+            <i class="fas fa-hat-cowboy"></i>
+
+          </div>
+
+          <div class="exhibit-content">
+
+            <span class="exhibit-period">1960-е</span>
+
+            <h3>Мини-юбка</h3>
+
+            <p>Символ молодежной революции и культурных изменений, ставший одним из самых влиятельных предметов одежды XX века.</p>
+
+            <div class="exhibit-designer">Дизайнер: Mary Quant</div>
+
+          </div>
+
+        </div>
+
+        <div class="exhibit-card">
+
+          <div class="exhibit-image">
+
+            <i class="fas fa-shoe-prints"></i>
+
+          </div>
+
+          <div class="exhibit-content">
+
+            <span class="exhibit-period">1980-е</span>
+
+            <h3>Туфли-платформы</h3>
+
+            <p>Яркий пример моды 1980-х — экстравагантные туфли с высокой платформой, отражающие дух избыточности и самовыражения.</p>
+
+            <div class="exhibit-designer">Дизайнер: Vivienne Westwood</div>
+
+          </div>
+
+        </div>
+
+        <div class="exhibit-card">
+
+          <div class="exhibit-image">
+
+            <i class="fas fa-glasses"></i>
+
+          </div>
+
+          <div class="exhibit-content">
+
+            <span class="exhibit-period">1970-е</span>
+
+            <h3>Очки-авиаторы</h3>
+
+            <p>Легендарные солнцезащитные очки, ставшие символом стиля и популярной культуры 1970-х годов.</p>
+
+            <div class="exhibit-designer">Дизайнер: Ray-Ban</div>
+
+          </div>
+
+        </div>
+
+        <div class="exhibit-card">
+
+          <div class="exhibit-image">
+
+            <i class="fas fa-ring"></i>
+
+          </div>
+
+          <div class="exhibit-content">
+
+            <span class="exhibit-period">1990-е</span>
+
+            <h3>Кольцо-татуировка</h3>
+
+            <p>Необычное ювелирное изделие, отражающее влияние уличной культуры и татуировок на моду конца XX века.</p>
+
+            <div class="exhibit-designer">Дизайнер: Alexander McQueen</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- News Page -->
+
+    <section id="news" class="page">
+
+      <div class="news-header">
+
+        <h2>Новости</h2>
+
+        <p>Актуальные события и анонсы выставок</p>
+
+      </div>
+
+      <div class="news-grid">
+
+        <div class="news-card">
+
+          <div class="news-image">
+
+            <i class="fas fa-star"></i>
+
+          </div>
+
+          <div class="news-content">
+
+            <span class="news-date">15 ноября 2025</span>
+
+            <h3>Новая выставка: "Мода и протест"</h3>
+
+            <p>Открываем выставку, посвященную взаимосвязи моды и социальных движений XX века. Увидите, как одежда стала инструментом самовыражения и протеста.</p>
+
+            <div class="news-meta">
+
+              <span class="news-author">Автор: Мария Иванова</span>
+
+              <a href="#" class="news-read-more">Читать далее</a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="news-card">
+
+          <div class="news-image">
+
+            <i class="fas fa-award"></i>
+
+          </div>
+
+          <div class="news-content">
+
+            <span class="news-date">10 ноября 2025</span>
+
+            <h3>Музей получил премию "Лучший культурный проект"</h3>
+
+            <p>МИДИС удостоен престижной награды за инновационный подход к представлению истории моды и образовательные программы для молодежи.</p>
+
+            <div class="news-meta">
+
+              <span class="news-author">Автор: Петр Смирнов</span>
+
+              <a href="#" class="news-read-more">Читать далее</a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="news-card">
+
+          <div class="news-image">
+
+            <i class="fas fa-calendar-alt"></i>
+
+          </div>
+
+          <div class="news-content">
+
+            <span class="news-date">5 ноября 2025</span>
+
+            <h3>Мастер-класс: "Создай свой винтажный аксессуар"</h3>
+
+            <p>Приглашаем на практический мастер-класс по созданию аксессуаров в стиле 1950-60-х годов. Под руководством профессиональных дизайнеров вы создадите уникальную вещь.</p>
+
+            <div class="news-meta">
+
+              <span class="news-author">Автор: Анна Петрова</span>
+
+              <a href="#" class="news-read-more">Читать далее</a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- About Page -->
+
+    <section id="about" class="page">
+
+      <div class="about-header">
+
+        <h2>О музее</h2>
+
+        <p>Международный институт дизайна и сервиса</p>
+
+      </div>
+
+      <div class="about-content">
+
+        <div class="about-text">
+
+          <h3>Наша история</h3>
+
+          <p>МИДИС был основан в 1998 году как частная коллекция, посвященная истории моды XX века. Сегодня мы являемся одним из ведущих музеев моды в России, объединяющим уникальные экспонаты, образовательные программы и современные технологии.</p>
+
+          <p>Наша миссия — сохранить наследие мировой моды, сделать его доступным для широкой аудитории и вдохновить новые поколения дизайнеров и ценителей искусства.</p>
+
+          <p>Музей расположен в историческом здании в центре Москвы, специально реконструированном для создания атмосферы разных эпох моды XX века.</p>
+
+        </div>
+
+        <div class="about-image">
+
+          <i class="fas fa-landmark"></i>
+
+        </div>
+
+      </div>
+
+      <div class="mission-values">
+
+        <div class="mission-card">
+
+          <i class="fas fa-bullseye"></i>
+
+          <h4>Наша миссия</h4>
+
+          <p>Сохранять и популяризировать наследие мировой моды XX века, создавая пространство для диалога между прошлым и настоящим, искусством и технологиями.</p>
+
+        </div>
+
+        <div class="mission-card">
+
+          <i class="fas fa-heart"></i>
+
+          <h4>Наши ценности</h4>
+
+          <p>Инновации, образование, доступность, уважение к истории, поддержка молодых талантов и культурное разнообразие.</p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-container">
+
+        <div class="footer-section">
+
+          <h4>МИДИС</h4>
+
+          <p>Международный институт дизайна и сервиса — музей моды XX века, объединяющий искусство, историю и современные технологии.</p>
+
+          <div class="social-links">
+
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+
+          </div>
+
+        </div>
+
+        <div class="footer-section">
+
+          <h4>Навигация</h4>
+
+          <ul class="footer-links">
+
+            <li><a href="#" onclick="showPage('home')">Главная</a></li>
+
+            <li><a href="#" onclick="showPage('exhibits')">Экспонаты</a></li>
+
+            <li><a href="#" onclick="showPage('news')">Новости</a></li>
+
+            <li><a href="#" onclick="showPage('about')">О музее</a></li>
+
+          </ul>
+
+        </div>
+
+        <div class="footer-section">
+
+          <h4>Контакты</h4>
+
+          <div class="contact-info">
+
+            <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Модная, 15</p>
+
+            <p><i class="fas fa-phone"></i> +7 (495) 123-45-67</p>
+
+            <p><i class="fas fa-envelope"></i> info@midis-museum.ru</p>
+
+            <p><i class="fas fa-clock"></i> Вт-Вс: 10:00-20:00, Пн: выходной</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="copyright">
+
+        &copy; 2025 МИДИС. Все права защищены. Создано с любовью к моде и истории.
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <script>
+    // Page navigation
+    function showPage(pageId) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      // Show selected page
+      document.getElementById(pageId).classList.add('active');
+      // Update active navigation link
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+      });
+      // Find and activate the corresponding nav link
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        const onclickAttr = link.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes(`'${pageId}'`)) {
+          link.classList.add('active');
+        }
+      });
+      // Close mobile menu if open
+      document.getElementById('navMenu').classList.remove('active');
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+    // Mobile menu toggle
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+      document.getElementById('navMenu').classList.toggle('active');
+    });
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    // Initialize on load
+    window.onload = function() {
+      // Add scroll effect immediately
+      if (window.scrollY > 100) {
+        document.getElementById('header').classList.add('scrolled');
+      }
+    };
+  </script>
+
+</body>
+
+</html>
